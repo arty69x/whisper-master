@@ -11,4 +11,8 @@ export class SxEngine {
   public proposals(): Proposal[] {
     return this.orchestrator.getProposals();
   }
+
+  public confirm(proposalId: string): Proposal {
+    return this.orchestrator.confirm(proposalId);
+  }
 }
