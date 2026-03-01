@@ -74,6 +74,7 @@ export class Orchestrator {
     this.stateMachine.transition("AGENT_APPLYING");
     const proposal = this.proposalQueue.confirm(proposalId);
     this.stateMachine.transition("FINALIZED");
+    this.stateMachine.transition("IDLE");
     return proposal;
   }
 
