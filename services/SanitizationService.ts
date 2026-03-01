@@ -1,11 +1,16 @@
-const blocked = ["eval(", "Function(", "child_process", "exec(", "spawn(", "<script>", "javascript:", "data:", "../", "/"];
-
 export class SanitizationService {
-  ensureSafePatch(content: string): void {
-    for (const token of blocked) {
-      if (content.includes(token)) {
-        throw new Error(`SANDBOX_REJECTION:${token}`);
-      }
+  public sanitizePath(input: string): string {
+    if (input.includes("..") || input.startsWith("/")) {
+      throw new Error("Invalid path");
     }
+    return input;
+  }
+
+  public sanitizeHost(input: string): string {
+    const allowed = process.env.VISION_ALLOWLIST_HOST;
+    if (!allowed || input !== allowed) {
+      throw new Error("Host rejected");
+    }
+    return input;
   }
 }

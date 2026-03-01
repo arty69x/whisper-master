@@ -1,12 +1,20 @@
-import { BaseAgent } from "./BaseAgent";
+import { BaseAgent } from "@agents/BaseAgent";
 
-export type PlanningInput = { prompt: string; previousFailures: string[] };
-export type PlanningOutput = { plan: string; tasks: string[] };
+export interface PlanningOutput {
+  steps: string[];
+}
 
-export class PlanningAgent extends BaseAgent<PlanningInput, PlanningOutput> {
-  name = "PlanningAgent";
-  async run(input: PlanningInput): Promise<PlanningOutput> {
-    const base = await this.ollama.generate("llama3", `${input.prompt} | failures:${input.previousFailures.join(",")}`);
-    return { plan: base, tasks: ["analyze", "generate", "validate"] };
+export class PlanningAgent extends BaseAgent<string, PlanningOutput> {
+  public run(input: string): PlanningOutput {
+    return {
+      steps: [
+        `snapshot:${input}`,
+        "generate:candidateA",
+        "generate:candidateB",
+        "review:deterministic",
+        "validate:compile-security",
+        "simulate:workspace"
+      ]
+    };
   }
 }

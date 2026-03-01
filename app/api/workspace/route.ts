@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
-import { engine } from "../../../core/runtime";
+import { WorkspaceIndex } from "@core/WorkspaceIndex";
 
 export async function GET(): Promise<NextResponse> {
-  try {
-    return NextResponse.json(engine.listWorkspace());
-  } catch {
-    return NextResponse.json([], { status: 500 });
-  }
+  const projects = await new WorkspaceIndex().listProjects("workspace");
+  return NextResponse.json({ projects });
 }
