@@ -1,10 +1,6 @@
 {
-  "workspaceRoot": "./workspace",
-  "maxHealingRounds": 3,
-  "memoryCapPerAgent": 20,
-  "memoryGlobalCap": 100,
-  "minIoU": 0.7,
-  "maxDriftMobilePx": 8,
-  "maxDriftDesktopPx": 12,
-  "expectedMasterHash": "f4c9e2e04d86ff2b9a1b6b9bd42be0f666f065d6ad1beaf1090928fda2fd4f51"
+  "name": "SOVEREIGN-CORE",
+  "maxHealingRounds": 1,
+  "safeModeManualConfirm": true,
+  "deterministic": true
 }

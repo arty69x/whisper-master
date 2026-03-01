@@ -1,9 +1,10 @@
-import { BaseAgent } from "./BaseAgent";
+import { BaseAgent } from "@agents/BaseAgent";
+import type { CandidateFile } from "@core/Schema";
 
-export class SecurityAuditAgent extends BaseAgent<{ code: string }, { success: boolean; severity: number }> {
-  name = "SecurityAuditAgent";
-  async run(input: { code: string }): Promise<{ success: boolean; severity: number }> {
-    const severity = input.code.includes("unsafe") ? 2 : 0;
-    return { success: severity === 0, severity };
+export class SecurityAuditAgent extends BaseAgent<CandidateFile[], number> {
+  public run(files: CandidateFile[]): number {
+    const forbidden = ["eval(", "Function(", "child_process", "spawn(", "exec(", "WebSocket"];
+    const hasViolation = files.some((file) => forbidden.some((token) => file.content.includes(token)));
+    return hasViolation ? 0 : 1;
   }
 }
