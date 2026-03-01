@@ -1,10 +1,17 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es2022"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
@@ -13,9 +20,39 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "types": ["node"],
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@core/*": [
+        "core/*"
+      ],
+      "@agents/*": [
+        "agents/*"
+      ],
+      "@tools/*": [
+        "tools/*"
+      ],
+      "@services/*": [
+        "services/*"
+      ]
+    },
+    "types": []
   },
-  "include": ["next-env.d.ts", "app/**/*.ts", "app/**/*.tsx", "core/**/*.ts", "agents/**/*.ts", "services/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "core/**/*.ts",
+    "agents/**/*.ts",
+    "tools/**/*.ts",
+    "services/**/*.ts",
+    "types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
